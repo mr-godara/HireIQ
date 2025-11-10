@@ -59,33 +59,52 @@ export default function UploadForm(){
         <div className="mb-3">
           <label style={{ 
             display: 'block', 
-            marginBottom: '8px', 
+            marginBottom: '12px', 
             fontWeight: '600',
             color: '#4a5568',
             fontSize: '14px'
           }}>
             Select Resume (PDF or DOCX)
           </label>
-          <input 
-            type="file" 
-            name="resume" 
-            accept=".pdf,.docx,.doc" 
-            onChange={handleFileChange}
-            disabled={uploading}
-            style={{
-              border: selectedFile ? '2px solid #48bb78' : '2px solid #e2e8f0'
-            }}
-          />
+          
+          <div className="file-upload-wrapper">
+            <input 
+              type="file" 
+              name="resume" 
+              id="resume-upload"
+              accept=".pdf,.docx,.doc" 
+              onChange={handleFileChange}
+              disabled={uploading}
+            />
+            <label 
+              htmlFor="resume-upload" 
+              className={`file-upload-label ${selectedFile ? 'has-file' : ''} ${uploading ? 'disabled' : ''}`}
+            >
+              <span className="file-upload-icon">
+                {selectedFile ? '✓' : '📁'}
+              </span>
+              <span>
+                {selectedFile ? 'File Selected - Click to Change' : 'Choose File'}
+              </span>
+            </label>
+          </div>
+
           {selectedFile && (
             <p style={{ 
-              marginTop: '8px', 
-              fontSize: '13px', 
+              marginTop: '12px', 
+              fontSize: '14px', 
               color: '#48bb78',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '8px',
+              padding: '12px',
+              background: '#f0fff4',
+              borderRadius: '8px',
+              border: '1px solid #c6f6d5'
             }}>
-              ✓ {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
+              <span style={{ fontSize: '18px' }}>📄</span>
+              <span style={{ fontWeight: '600' }}>{selectedFile.name}</span>
+              <span style={{ color: '#718096' }}>({(selectedFile.size / 1024).toFixed(2)} KB)</span>
             </p>
           )}
         </div>
