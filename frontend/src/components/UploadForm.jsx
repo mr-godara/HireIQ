@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { API_BASE_URL } from '../config'
 
 export default function UploadForm(){
   const [selectedFile, setSelectedFile] = useState(null)
@@ -26,7 +27,7 @@ export default function UploadForm(){
     try {
       const fd = new FormData()
       fd.append('resume', selectedFile)
-      const res = await axios.post('http://127.0.0.1:5000/upload', fd)
+      const res = await axios.post(`${API_BASE_URL}/upload`, fd)
       
       setMessage({ 
         type: 'success', 

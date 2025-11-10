@@ -4,6 +4,7 @@ import JobForm from './components/JobForm'
 import MatchTable from './components/MatchTable'
 import Dashboard from './components/Dashboard'
 import axios from 'axios'
+import { API_BASE_URL } from './config'
 
 export default function App(){
   const [jobId, setJobId] = useState(null)
@@ -14,7 +15,7 @@ export default function App(){
   const createJob = async (title, description) => {
     setLoading(true)
     try {
-      const res = await axios.post('http://127.0.0.1:5000/job', {title, description})
+      const res = await axios.post(`${API_BASE_URL}/job`, {title, description})
       const newJobId = res.data.job_id
       setJobId(newJobId)
       return newJobId
@@ -31,7 +32,7 @@ export default function App(){
     if (!id) return
     setLoading(true)
     try {
-      const res = await axios.get(`http://127.0.0.1:5000/match/${id}`)
+      const res = await axios.get(`${API_BASE_URL}/match/${id}`)
       setMatches(res.data)
     } catch (error) {
       console.error('Error fetching matches:', error)
@@ -50,7 +51,7 @@ export default function App(){
       )
       
       setLoading(true)
-      await axios.post('http://127.0.0.1:5000/application/shortlist', {
+      await axios.post(`${API_BASE_URL}/application/shortlist`, {
         candidate_id: candidateId,
         job_id: jobId,
         score: score,
@@ -90,7 +91,7 @@ export default function App(){
     
     try {
       setLoading(true)
-      await axios.post('http://127.0.0.1:5000/application/reject', {
+      await axios.post(`${API_BASE_URL}/application/reject`, {
         candidate_id: candidateId,
         job_id: jobId,
         score: score

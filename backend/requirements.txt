@@ -1,6 +1,7 @@
-Flask
-flask-cors
-flask_sqlalchemy
-pdfminer.six
-python-docx
+Flask==3.1.0
+flask-cors==5.0.0
+flask_sqlalchemy==3.1.1
+pdfminer.six==20231228
+python-docx==1.1.2
+gunicorn==21.2.0
 sentence-transformers  # optional - faster/better matching if installed

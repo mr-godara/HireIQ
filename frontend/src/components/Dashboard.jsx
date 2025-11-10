@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_BASE_URL } from '../config'
 
 export default function Dashboard({ jobId }) {
   const [topMatches, setTopMatches] = useState([])
@@ -18,8 +19,8 @@ export default function Dashboard({ jobId }) {
     setLoading(true)
     try {
       const [matchesRes, statsRes] = await Promise.all([
-        axios.get(`http://127.0.0.1:5000/dashboard/top-matches/${jobId}?limit=10`),
-        axios.get(`http://127.0.0.1:5000/dashboard/stats/${jobId}`)
+        axios.get(`${API_BASE_URL}/dashboard/top-matches/${jobId}?limit=10`),
+        axios.get(`${API_BASE_URL}/dashboard/stats/${jobId}`)
       ])
       
       setTopMatches(matchesRes.data.top_matches || [])
