@@ -3,8 +3,9 @@ services:
   - type: web
     name: hireiq-backend
     runtime: python
-    buildCommand: cd backend && pip install -r requirements.txt
-    startCommand: cd backend && gunicorn app:app
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -16,8 +17,9 @@ services:
   - type: web
     name: hireiq-frontend
     runtime: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
     envVars:
       - key: NODE_VERSION
         value: 18.17.0
